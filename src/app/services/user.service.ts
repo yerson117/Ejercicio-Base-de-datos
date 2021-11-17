@@ -13,19 +13,19 @@ export class UserService {
               private http: HttpClient) { }
 
   create(data:any){
-    return this.http.post(this.URL_API+'/user/create', data)
+    return this.http.post(this.URL_API+'/user', data)
   }
 
   update(data:any){
-    return this.http.put(this.URL_API+'/user/update', data)
+    return this.http.put(this.URL_API+'/user', data)
   }
 
   delete(id:string){
-    return this.http.delete(this.URL_API+'/user/delete/' + id)
+    return this.http.delete(this.URL_API+'/user/' + id)
   }
 
   list(){
-    return this.http.get(this.URL_API+'/user/list')
+    return this.http.get(this.URL_API+'/user/')
   }
 
   active(data:any){
@@ -36,7 +36,7 @@ export class UserService {
     return this.http.post(this.URL_API+'/user/search', data)
   }
 
-  search2(data:any){
-    return this.http.get(this.URL_API+'/user/search2', data)
+  searchGet(data:any){
+    return this.http.get(this.URL_API+'/user/searchget', data)
   }
 }

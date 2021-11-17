@@ -73,7 +73,7 @@ export class FormularioComponent implements OnInit {
             console.log('Usuario registrado')
           }
         },
-        complete: () => { console.log('Usuario creado') }, // completeHandler
+        complete: () => { console.log(this.list()) }, // completeHandler
         error: () => { console.log('Error creating user') }    // errorHandler 
       })
     }
@@ -90,25 +90,26 @@ export class FormularioComponent implements OnInit {
   edit(item: any) {
     console.log(item)
     this.form.get('user')?.setValue(item.user)
-    this.selectedId = item.id
-
+    this.selectedId = item._id
+      console.log(this.list())
   }
 
   commitEdit() {
     for (let index = 0; index < this.users.length; index++) {
-      if (this.users[index].id == this.selectedId) {
+      if (this.users[index]._id == this.selectedId) {
        // this.users[index].user = this.form.get('user')?.value
 
         this.userService.update({
-          id: this.selectedId,
+          _id: this.selectedId,
           user: this.form.get('user')?.value
         }).subscribe({
           next: (res: any) => {
             if (res.status) {
-              console.log('Usuario actualizado')
+              console.log(this.list())
             }
           },
-          complete: () => { console.log('Usuario creado') }, // completeHandler
+          complete: () => { console.log(this.list()
+          ) }, // completeHandler
           error: () => { console.log('Error updating user') }    // errorHandler 
         })
         //console.log(this.form.get('user')?.value)
@@ -118,23 +119,23 @@ export class FormularioComponent implements OnInit {
     //console.log(this.users)
   }
 
-  delete(id: string) {
+  delete(_id: string) {
     for (let index = 0; index < this.users.length; index++) {
-      if (this.users[index].id == id) {
-        this.userService.delete(id).subscribe({
+      if (this.users[index]._id == _id) {
+        this.userService.delete(_id).subscribe({
           next: (res: any) => {
             if (res.status) {
               this.users.splice(index, 1)
               console.log('Usuario eliminado')
             }
           },
-          complete: () => { console.log('Usuario eliminado') }, // completeHandler
+          complete: () => { this.list() }, // completeHandler
           error: () => { console.log('Error removing user') }    // errorHandler 
         })
       }
     }
-    console.log(this.users)
   }
+  
 
   disEnable(item: any) {
     for (let index = 0; index < this.users.length; index++) {

@@ -1,6 +1,6 @@
 export const configuration = {
     backend: {
-        url: 'http://localhost:4200',
+        url: 'http://localhost:5000',
     },
     formComponent: {
         title:'Registro usuario',

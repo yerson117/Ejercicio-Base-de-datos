@@ -16,10 +16,10 @@
   </thead>
   <tbody *ngIf="users && users.length>0">
     <tr *ngFor="let item of users">
-      <th scope="row">{{item.id | slice: 0 : 10}}...</th> 
+      <th scope="row">{{item._id | slice: 0 : 10}}...</th> 
       <td>{{item.user}}</td>
       <td><button class="btn btn-primary" (click)="edit(item)"> {{getConfigFc().config.formComponent.btnEdit}} </button></td>
-      <td><button class="btn btn-danger" (click)="delete(item.id)"> Eliminar </button></td>
+      <td><button class="btn btn-danger" (click)="delete(item._id)"> Eliminar </button></td>
       <td><button class="btn" (click)="disEnable(item)" [ngClass]="{'btn-success': item.status == true ,
         'btn-light': item.status == false }"> Activar </button></td>
     </tr>
