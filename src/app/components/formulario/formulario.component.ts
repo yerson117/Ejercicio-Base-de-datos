@@ -73,7 +73,7 @@ export class FormularioComponent implements OnInit {
             console.log('Usuario registrado')
           }
         },
-        complete: () => { console.log(this.list()) }, // completeHandler
+        complete: () => { this.list() }, // completeHandler
         error: () => { console.log('Error creating user') }    // errorHandler 
       })
     }
@@ -91,7 +91,6 @@ export class FormularioComponent implements OnInit {
     console.log(item)
     this.form.get('user')?.setValue(item.user)
     this.selectedId = item._id
-      console.log(this.list())
   }
 
   commitEdit() {
@@ -105,11 +104,10 @@ export class FormularioComponent implements OnInit {
         }).subscribe({
           next: (res: any) => {
             if (res.status) {
-              console.log(this.list())
             }
           },
-          complete: () => { console.log(this.list()
-          ) }, // completeHandler
+          complete: () => { this.list()
+          }, // completeHandler
           error: () => { console.log('Error updating user') }    // errorHandler 
         })
         //console.log(this.form.get('user')?.value)
@@ -139,11 +137,28 @@ export class FormularioComponent implements OnInit {
 
   disEnable(item: any) {
     for (let index = 0; index < this.users.length; index++) {
-      if (this.users[index].id == item.id) {
-        this.users[index].status = !this.users[index].status
+      if (this.users[index]._id == item._id) {
+        this.userService.active({
+          _id: item._id,
+          status: !item.status
+        }).subscribe({
+          next: (res: any) => {
+            if (res.status) {
+              console.log('Usuario actualizado')
+            }
+          },
+          complete: () => {
+            this.users[index].status = !this.users[index].status
+          }, // completeHandler
+          error: () => { console.log('Error removing user') }    // errorHandler 
+        })
       }
     }
   }
+  /*{ _id: _id },
+    { 
+      status: status
+    }*/
 
   list() {
     this.userService.list().subscribe({
@@ -155,5 +170,20 @@ export class FormularioComponent implements OnInit {
       complete: () => { console.log('Usuarios listados') }, // completeHandler
       error: () => { console.log('Error to the list user') }    // errorHandler 
     })
+  }
+  searchget(event:any) {
+      this.userService.search({
+        user: event.target.value
+      }).subscribe({
+        next: (res: any) => {
+          console.log(res)
+          console.log(res.length)
+          if (res.length>0) {
+            this.users = res
+          }
+        },
+        complete: () => { console.log('Usuarios listados') }, // completeHandler
+        error: () => { console.log('Error to the list user') }    // errorHandler 
+      })
   }
 }

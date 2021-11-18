@@ -4,6 +4,8 @@
 <form [formGroup]="form">
   <input type="text" class="form-control" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
   <button class="btn btn-success" (click)="validacion()"> {{ config.config.formComponent.btnAccept }} </button>
+  <!--<input type="text" class="form-control" (keyup)="search($event)">-->
+  <input type="text" class="form-control" (keyup)="searchget($event)">
 </form>
 <table class="table">
   <thead>
