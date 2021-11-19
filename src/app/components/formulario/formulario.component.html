@@ -1,8 +1,20 @@
 <div class="text-center contenido">
-<p>formulario works!</p>
+<p>Employee</p>
 
 <form [formGroup]="form">
-  <input type="text" class="form-control" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
+  <input type="text" class="form-control" placeholder="Name" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
+  <input type="text" class="form-control" placeholder="Phone" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
+  <input type="email" class="form-control" placeholder="Email" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
+  <input type="text" class="form-control" placeholder="Document" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
+  <input type="number" class="form-control" placeholder="Salary" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
+  <label for="">
+    Gender
+    <select name="Gender" id="" aria-placeholder="Gender">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </label>
+  <input type="date" class="form-control" placeholder="Date Of Birth" [ngClass]="{'error-validation': sub && f['user'].errors, 'success-validation':user.valid && (user.dirty || user.touched) }" formControlName="user">
   <button class="btn btn-success" (click)="validacion()"> {{ config.config.formComponent.btnAccept }} </button>
   <!--<input type="text" class="form-control" (keyup)="search($event)">-->
   <input type="text" class="form-control" (keyup)="searchget($event)">
@@ -12,13 +24,19 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Document</th>
+      <th scope="col">Email</th>
+      <th scope="col">Salary</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Date Of Birth</th>
       <th scope="col">Editar</th>
       <th scope="col">Eliminar</th>
     </tr>
   </thead>
   <tbody *ngIf="users && users.length>0">
     <tr *ngFor="let item of users">
-      <th scope="row">{{item._id | slice: 0 : 10}}...</th> 
+      <th scope="row">{{item._id | slice: 0 : 10}}...</th>
       <td>{{item.user}}</td>
       <td><button class="btn btn-primary" (click)="edit(item)"> {{getConfigFc().config.formComponent.btnEdit}} </button></td>
       <td><button class="btn btn-danger" (click)="delete(item._id)"> Eliminar </button></td>
